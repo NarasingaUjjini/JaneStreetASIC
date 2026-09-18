@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
-# Yosys synthesis for Cycle. Writes docs/area.md and build/synth.v
+# Yosys synthesis for Cycle. Writes build/synth.v and build/synth.log.
+# docs/area.md is the committed CMOS5L writeup — do not clobber it.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 mkdir -p "$ROOT/build"
 cd "$ROOT"
 
-yosys -q -p "
+# Do not pass -q: `stat` must land in build/synth.log.
+yosys -p "
 read_verilog -I src src/cycle_mem.v src/cycle_fifo.v src/cycle_uart_rx.v src/cycle_uart_tx.v src/cycle_host.v src/cycle_sm.v src/cycle_capture.v src/tt_um_NarasingaUjjini_cycle.v
 hierarchy -check -top tt_um_NarasingaUjjini_cycle
 proc; opt
@@ -20,14 +22,15 @@ write_verilog -noattr build/synth.v
 python3 - <<'PY'
 from pathlib import Path
 log = Path("build/synth.log").read_text()
-Path("docs/area.md").write_text(
-    "# Synthesis area (Yosys 0.33, generic cells)\n\n"
+Path("build/area_stat.md").write_text(
+    "# Local Yosys stat (generic cells)\n\n"
     "6×4 Tiny Tapeout tiles is roughly 24k cells of budget. "
     "CMOS5L has 5 metals — leave slack for routing.\n\n"
     "```\n" + log.strip() + "\n```\n\n"
     "LibreLane `CLOCK_PERIOD` = 21 ns, `PL_TARGET_DENSITY_PCT` = 50. "
     "Full GDS/timing comes from `.github/workflows/gds.yaml` on GitHub Actions "
-    "(Tiny Tapeout `ttihp26b` until the CMOS5L template is published).\n"
+    "(`TinyTapeout/tt-gds-action@ihp-cmos5l`, PDK `ihp-sg13cmos5l`, from "
+    "[ttihp-verilog-template@cmos5l](https://github.com/TinyTapeout/ttihp-verilog-template/tree/cmos5l)).\n"
 )
-print(Path("docs/area.md").read_text())
+print(Path("build/area_stat.md").read_text())
 PY

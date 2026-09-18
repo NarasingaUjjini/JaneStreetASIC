@@ -7,12 +7,15 @@ project:
   language:     "Verilog"
   clock_hz:     48000000
 
-  # Jane Street CMOS5L contest: 6x4 tiles (~0.7 mm^2). Public template comments
-  # list smaller sizes; the contest page instructs 6x4.
+  # Jane Street CMOS5L contest requires 6x4 (~0.7 mm^2).
+  # Scaffolded from TinyTapeout/ttihp-verilog-template branch cmos5l.
   tiles: "6x4"
 
+  # Your top module name must start with "tt_um_". Make it unique by including your github username:
   top_module:  "tt_um_NarasingaUjjini_cycle"
 
+  # Source files must be in ./src and you must list each source file separately.
+  # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
     - "cycle_isa.vh"
     - "cycle_mem.v"
@@ -25,6 +28,7 @@ project:
     - "tt_um_NarasingaUjjini_cycle.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+# This section is for the datasheet/website.
 pinout:
   ui[0]: "HOST_RX"
   ui[1]: "TRIGGER"
@@ -53,4 +57,5 @@ pinout:
   uio[6]: "GPIO6"
   uio[7]: "GPIO7"
 
+# Do not change!
 yaml_version: 6

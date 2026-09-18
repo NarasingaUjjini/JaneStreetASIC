@@ -1,3 +1,5 @@
+![gds](https://github.com/NarasingaUjjini/JaneStreetASIC/actions/workflows/gds.yaml/badge.svg) ![docs](https://github.com/NarasingaUjjini/JaneStreetASIC/actions/workflows/docs.yaml/badge.svg) ![test](https://github.com/NarasingaUjjini/JaneStreetASIC/actions/workflows/test.yaml/badge.svg) ![fpga](https://github.com/NarasingaUjjini/JaneStreetASIC/actions/workflows/fpga.yaml/badge.svg)
+
 # Cycle — protocol emulator ASIC
 
 Open-source entry for [Jane Street’s protocol emulator ASIC competition](https://blog.janestreet.com/protocol-emulator-asic-competition/).
@@ -70,6 +72,16 @@ See [docs/verification.md](docs/verification.md).
 
 - Deadline 18 January 2027. Prize: Jane Street pays to tape out novel designs on the March 2027 CMOS5L shuttle.
 - Tile size is **6×4** as specified. If they unlock 8×4, the unused area takes a 512×16 SRAM + a third capture bank.
-- GDS GitHub Action currently uses the public IHP flow (`ttihp26b`). Switch the PDK to `ihp-sg13cmos5l` when Jane Street’s CMOS5L template arrives.
+- GDS uses the official Tiny Tapeout CMOS5L flow: [ttihp-verilog-template@cmos5l](https://github.com/TinyTapeout/ttihp-verilog-template/tree/cmos5l) (`tt-gds-action@ihp-cmos5l`, PDK `ihp-sg13cmos5l`).
+
+## GitHub Actions (GDS / docs / tests)
+
+This repo is the CMOS5L Verilog template plus Cycle RTL. After the first push:
+
+1. On GitHub: **Settings → Actions → General → Allow all actions**.
+2. For the GDS viewer: [enable GitHub Pages](https://tinytapeout.com/faq/#my-github-action-is-failing-on-the-pages-part) (source: GitHub Actions).
+3. Push to `main` or run the `gds` / `test` / `docs` workflows manually.
+
+LibreLane `CLOCK_PERIOD` is 21 ns and `PL_TARGET_DENSITY_PCT` is 50 (routing slack on five metal layers). Tile size in `info.yaml` is **6x4**, as Jane Street specified.
 
 License: Apache-2.0 (Tiny Tapeout template).

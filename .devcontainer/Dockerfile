@@ -3,6 +3,8 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:${VARIANT}
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PDK_ROOT=/home/vscode/ttsetup/pdk
+# Matches TinyTapeout/ttihp-verilog-template@cmos5l. GDS hardening uses
+# tt-gds-action@ihp-cmos5l with PDK ihp-sg13cmos5l (see .github/workflows/gds.yaml).
 ENV PDK=ihp-sg13g2
 ARG TT_SUPPORT_TOOLS_BRANCH=main
 

@@ -17,4 +17,4 @@ Per-block (pre-flatten, Yosys `stat` on each module):
 - `cycle_capture` 64×8: ~3128 cells
 - `cycle_host` + UARTs + FIFOs: a few hundred cells
 
-Full GDS, DRC, LVS, STA, and **gate-level cocotb** run on GitHub Actions via `.github/workflows/gds.yaml` (Tiny Tapeout `ttihp26b` / IHP until the Jane Street CMOS5L template is published). Local flattened netlist: `build/synth.v` from `scripts/synth.sh`.
+Full GDS, DRC, LVS, STA, and **gate-level cocotb** run on GitHub Actions via `.github/workflows/gds.yaml` (`TinyTapeout/tt-gds-action@ihp-cmos5l`, PDK `ihp-sg13cmos5l`, from [ttihp-verilog-template@cmos5l](https://github.com/TinyTapeout/ttihp-verilog-template/tree/cmos5l)). Local flattened netlist: `build/synth.v` from `scripts/synth.sh`.
