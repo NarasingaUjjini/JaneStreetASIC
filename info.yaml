@@ -1,0 +1,56 @@
+# Tiny Tapeout project information
+project:
+  title:        "Cycle protocol emulator"
+  author:       "NarasingaUjjini"
+  discord:      ""
+  description:  "Reprogrammable pin machine with capture/replay for UART, SPI, I2C, JTAG"
+  language:     "Verilog"
+  clock_hz:     48000000
+
+  # Jane Street CMOS5L contest: 6x4 tiles (~0.7 mm^2). Public template comments
+  # list smaller sizes; the contest page instructs 6x4.
+  tiles: "6x4"
+
+  top_module:  "tt_um_NarasingaUjjini_cycle"
+
+  source_files:
+    - "cycle_isa.vh"
+    - "cycle_mem.v"
+    - "cycle_fifo.v"
+    - "cycle_uart_rx.v"
+    - "cycle_uart_tx.v"
+    - "cycle_host.v"
+    - "cycle_sm.v"
+    - "cycle_capture.v"
+    - "tt_um_NarasingaUjjini_cycle.v"
+
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+pinout:
+  ui[0]: "HOST_RX"
+  ui[1]: "TRIGGER"
+  ui[2]: ""
+  ui[3]: ""
+  ui[4]: ""
+  ui[5]: ""
+  ui[6]: ""
+  ui[7]: ""
+
+  uo[0]: "HOST_TX"
+  uo[1]: "RUNNING"
+  uo[2]: "RX_FIFO_HAS_DATA"
+  uo[3]: "TX_FIFO_FULL"
+  uo[4]: "SM0_HALTED"
+  uo[5]: "SM1_HALTED"
+  uo[6]: "CAP_OR_PLAY"
+  uo[7]: "CAP_FULL"
+
+  uio[0]: "GPIO0"
+  uio[1]: "GPIO1"
+  uio[2]: "GPIO2"
+  uio[3]: "GPIO3"
+  uio[4]: "GPIO4"
+  uio[5]: "GPIO5"
+  uio[6]: "GPIO6"
+  uio[7]: "GPIO7"
+
+yaml_version: 6

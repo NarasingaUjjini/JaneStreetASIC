@@ -1,0 +1,31 @@
+[options]
+mode bmc
+depth 20
+
+[engines]
+smtbmc boolector
+
+[script]
+read -sv formal/pin_safety.sv
+read -sv src/tt_um_NarasingaUjjini_cycle.v
+read -sv src/cycle_sm.v
+read -sv src/cycle_mem.v
+read -sv src/cycle_fifo.v
+read -sv src/cycle_uart_rx.v
+read -sv src/cycle_uart_tx.v
+read -sv src/cycle_host.v
+read -sv src/cycle_capture.v
+hierarchy -top tt_um_NarasingaUjjini_cycle
+proc; opt
+
+[files]
+formal/pin_safety.sv
+src/tt_um_NarasingaUjjini_cycle.v
+src/cycle_sm.v
+src/cycle_mem.v
+src/cycle_fifo.v
+src/cycle_uart_rx.v
+src/cycle_uart_tx.v
+src/cycle_host.v
+src/cycle_capture.v
+src/cycle_isa.vh
