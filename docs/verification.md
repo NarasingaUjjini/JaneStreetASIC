@@ -24,7 +24,7 @@ Jane Street’s announcement said verification matters more as AI writes more RT
 
 5. **Synthesis.** `scripts/synth.sh` runs Yosys `synth` and writes `docs/area.md`. Budget: 6×4 tiles ≈ 24k cells; we keep slack for CMOS5L’s five metal layers (target density 50%).
 
-6. **Gate-level.** Tiny Tapeout `gds.yaml` GL job (`tt-gds-action@ihp-cmos5l`) simulates the LibreLane CMOS5L netlist. Locally, `scripts/synth.sh` also writes `build/synth.v`.
+6. **Gate-level.** Tiny Tapeout `gds.yaml` GL job (`tt-gds-action@ihp-cmos5l`) simulates the LibreLane CMOS5L netlist. `test/Makefile` must compile `sg13cmos5l_udp.v` before the stdcells (they instantiate `ihp_mux2` / `ihp_mux4`). Locally, `scripts/synth.sh` also writes `build/synth.v`.
 
 ## AI-assisted, adversarial
 

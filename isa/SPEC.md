@@ -1,6 +1,8 @@
 # Cycle ISA specification
 
-This is the frozen 16-bit encoding. Hardware (`src/cycle_isa.vh`), the assembler (`isa/encoding.py`), and the golden model (`isa/golden.py`) must match. Tests fail if they drift.
+This is the frozen 16-bit encoding — the “vocabulary” of the tiny interpreter. Hardware (`src/cycle_isa.vh`), the assembler (`isa/encoding.py`), and the Python fake chip (`isa/golden.py`) must match. Tests fail if they drift.
+
+Read the repository README first if you want the contest and a UART walkthrough in normal language. This file is the opcode list.
 
 ## Why an ISA instead of hardwired UART
 

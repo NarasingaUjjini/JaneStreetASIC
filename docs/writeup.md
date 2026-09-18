@@ -1,5 +1,7 @@
 # Cycle: a protocol VM with capture/replay
 
+Human walkthrough of the contest and a UART example: the repository README. This page is the judge-facing pitch.
+
 Jane Street asked for a general-purpose protocol emulator, not UART+SPI+I2C IP. Cycle is a 16-bit ISA whose only job is pins and time, plus the reverse-engineering feature their hardware team actually uses: **record a bus, dump it, play it back**.
 
 ## Why not PIO

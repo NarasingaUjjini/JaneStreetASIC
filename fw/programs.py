@@ -32,27 +32,25 @@ from isa.encoding import (
 
 
 def uart_tx(baud_div=15) -> list[int]:
-    """8N1 TX on uio[0]. PULL a byte, shift LSB first, idle high.
+    """Send bytes on pin 0 using UART (idle 1, start 0, 8 bits LSB first, stop 1).
 
-    Each bit is  (baud_div+1) ticks plus the OUT/SET instruction.
-    Callers should set SM clkdiv so that one tick is one bit-time, or
-    pass baud_div as extra DELAY after each bit. Here clkdiv is set to
-    baud_div and DELAY is 0, so one instruction per bit-time after SET CLKDIV.
+    This is the recipe the README walks through. clkdiv=baud_div so one
+    instruction is one bit-time. Tests pass baud_div=0 (one clock per bit).
     """
     a = Assembler()
-    a.set(SET_OUTBASE, 0)
-    a.set(SET_PINDIRS, 0x01)
-    a.set(SET_PINS, 0x01)  # idle high
+    a.set(SET_OUTBASE, 0)       # OUT dumps bits onto pin 0
+    a.set(SET_PINDIRS, 0x01)    # pin 0 = output
+    a.set(SET_PINS, 0x01)       # idle high
     a.set(SET_CLKDIV, baud_div)
     a.label("idle")
-    a.pin(0, 1, 1)
-    a.pull(iff=0)
-    a.set(SET_X, 7)  # 8 data bits, x-- loop
-    a.pin(0, 0, 1)  # start bit (one tick)
+    a.pin(0, 1, 1)              # stay high until a byte arrives
+    a.pull(iff=0)               # wait for a byte from the laptop
+    a.set(SET_X, 7)             # 8 data bits; X counts 7,6,…,0
+    a.pin(0, 0, 1)              # start bit
     a.label("bits")
-    a.out(1, OUT_PINS)
+    a.out(1, OUT_PINS)          # one data bit
     a.jmp(JC_XDEC, label="bits")
-    a.pin(0, 1, 1)  # stop bit
+    a.pin(0, 1, 1)              # stop bit
     a.jmp_always(label="idle")
     return a.words()
 

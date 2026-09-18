@@ -4,7 +4,7 @@ Tiny Tapeout datasheet for Cycle, Jane Street protocol-emulator ASIC.
 
 ## How it works
 
-If you have never seen an ASIC repo, start with the repository file `docs/whats-going-on.md`.
+The repository README is the human explanation (what the contest is, what a pin is, and a UART walkthrough). This page is the Tiny Tapeout datasheet.
 
 Cycle is a dual state-machine protocol emulator. Each machine has a 16-bit ISA specialised for waiting on pins, driving pins, shifting bits, and counting clocks. Instruction memory is 128 × 16-bit dual-read flop RAM (an IHP 512×16 SRAM wrapper is included for the CMOS5L harden).
 
