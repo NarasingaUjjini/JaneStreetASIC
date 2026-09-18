@@ -4,6 +4,8 @@ Tiny Tapeout datasheet for Cycle, Jane Street protocol-emulator ASIC.
 
 ## How it works
 
+If you have never seen an ASIC repo, start with the repository file `docs/whats-going-on.md`.
+
 Cycle is a dual state-machine protocol emulator. Each machine has a 16-bit ISA specialised for waiting on pins, driving pins, shifting bits, and counting clocks. Instruction memory is 128 × 16-bit dual-read flop RAM (an IHP 512×16 SRAM wrapper is included for the CMOS5L harden).
 
 After reset the chip is halted and listens on a host UART (`ui[0]` RX, `uo[0]` TX, 8 clocks per bit in the default RTL parameter; scale `BAUD_DIV` for 115200 at your board clock). Load firmware with `A5 01 addr lo hi`, then `A5 02` to RUN.

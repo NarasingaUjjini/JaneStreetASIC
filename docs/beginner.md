@@ -1,5 +1,7 @@
 # Beginner glossary (no prior chip experience required)
 
+**Start with [What’s going on](whats-going-on.md)** — the contest, what Cycle is, a map of this repo, and a UART walkthrough. This page is only the dictionary.
+
 You are not writing an app. You are describing a **circuit** that a factory will etch in silicon.
 
 **ASIC** — Application-Specific Integrated Circuit. A chip whose transistors are fixed at manufacture. You cannot add a new UART block later. You *can* add a tiny programmable engine, which is this project.

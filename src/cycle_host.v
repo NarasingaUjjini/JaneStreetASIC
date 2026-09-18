@@ -4,7 +4,8 @@
 
 // UART command processor. Frames are 0xA5, cmd, payload...
 // CMD_WMEM  0x01  addr, lo, hi     write one instruction word
-// CMD_RUN   0x02                   start both state machines
+// CMD_RUN   0x02                   start SM0 (SM1 stays halted)
+// CMD_RUN1  0x0E                   start SM1
 // CMD_HALT  0x03                   stop
 // CMD_WFIFO 0x04  data             byte into SM0 TX FIFO
 // CMD_RFIFO 0x05                   pop SM0 RX FIFO, send it back

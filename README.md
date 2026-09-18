@@ -2,6 +2,8 @@
 
 # Cycle — protocol emulator ASIC
 
+**New to chips? Read [docs/whats-going-on.md](docs/whats-going-on.md) first.** It explains the Jane Street contest, what this chip is, how the repo is laid out, and walks through making pin 0 speak UART. Glossary: [docs/beginner.md](docs/beginner.md).
+
 Open-source entry for [Jane Street’s protocol emulator ASIC competition](https://blog.janestreet.com/protocol-emulator-asic-competition/).
 
 **Chip name:** `tt_um_NarasingaUjjini_cycle`
@@ -10,7 +12,7 @@ Open-source entry for [Jane Street’s protocol emulator ASIC competition](https
 
 This is a tiny **programmable pin machine**, not a UART/SPI/I2C block glued together. After the chip is manufactured you load new firmware over a host UART and it can speak protocols that did not exist when the silicon was taped out. The extra that is not a PIO clone: **cycle-accurate capture and replay** of the eight protocol pins, which is what you actually want when reverse-engineering a bus.
 
-If you have never designed a chip, read [docs/beginner.md](docs/beginner.md) first. The instruction set is frozen in [isa/SPEC.md](isa/SPEC.md). The Python file [isa/golden.py](isa/golden.py) is the spec: if Verilog disagrees, Verilog is wrong.
+The instruction set is frozen in [isa/SPEC.md](isa/SPEC.md). The Python file [isa/golden.py](isa/golden.py) is the spec: if Verilog disagrees, Verilog is wrong.
 
 ## What you can do with it
 
